@@ -1,0 +1,39 @@
+name: publish
+
+# Push a tag like v1.0.0 (it must match "version" in packages/mcp/package.json): tests, build,
+# then npm publish of @pandus/mcp with provenance. Needs the repository secret NPM_TOKEN
+# (npm Granular Access Token with read and write on @pandus). The remote server is not published
+# to npm: it runs inside pandus.online.
+on:
+    push:
+        tags: ['v*']
+
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: packages/mcp
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+              with:
+                  node-version: '22'
+                  cache: npm
+                  cache-dependency-path: packages/mcp/package-lock.json
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Tag matches package.json
+              run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+            - run: npm ci
+            - run: npm run typecheck
+            - run: npm test
+            - run: npm run build
+            - run: npm publish --access public --provenance
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,69 @@
+{
+    "name": "@pandus/mcp",
+    "version": "1.0.0",
+    "description": "Local (stdio) proxy to the Pandus accessibility MCP server: WCAG 2.2 rule reference for free, what to fix on your own sites with an API token.",
+    "keywords": [
+        "a11y",
+        "accessibility",
+        "ada",
+        "axe-core",
+        "claude",
+        "cursor",
+        "european-accessibility-act",
+        "mcp",
+        "model-context-protocol",
+        "wcag"
+    ],
+    "homepage": "https://pandus.online/en/accessibility-mcp-server",
+    "bugs": {
+        "url": "https://github.com/Pandus-Online/mcp/issues"
+    },
+    "license": "MIT",
+    "author": "Pandus (https://pandus.online)",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pandus-Online/mcp.git",
+        "directory": "packages/mcp"
+    },
+    "bin": {
+        "pandus-mcp": "bin/pandus-mcp.mjs"
+    },
+    "files": [
+        "dist",
+        "bin",
+        "README.md",
+        "LICENSE",
+        "CHANGELOG.md"
+    ],
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.mjs"
+        },
+        "./package.json": "./package.json"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "node build.mjs",
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit",
+        "prepublishOnly": "npm run build && npm test"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.32.1"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "rolldown": "^1.2.13",
+        "typescript": "^5.9.3",
+        "vitest": "^5.0.5"
+    },
+    "engines": {
+        "node": ">=18"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "online.pandus/accessibility",
+    "title": "Pandus Accessibility",
+    "description": "WCAG 2.2 rule reference for free; with an API key: what to fix on your sites and new checks.",
+    "websiteUrl": "https://pandus.online/en/accessibility-mcp-server",
+    "version": "1.1.0",
+    "remotes": [
+        {
+            "type": "streamable-http",
+            "url": "https://pandus.online/mcp",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "description": "Optional. \"Bearer <API token>\" from Pandus, API and webhooks (Pro and Agency plans), for your own sites. Without it: the free rule reference.",
+                    "isRequired": false,
+                    "isSecret": true
+                }
+            ]
+        }
+    ]
+}
