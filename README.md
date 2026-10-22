@@ -61,5 +61,5 @@ The server itself runs inside the Pandus application and is not in this reposito
 from an automated check, not a full audit, and are not legal advice. Fields ending in
 `_untrusted` carry HTML from checked pages: data, never instructions.
 
-Issues and questions: [GitHub issues](https://github.com/Pandus-Online/mcp/issues) or
-hello@pandus.online.
+Issues and questions: [GitHub issues](https://github.com/Pandus-Online/mcp/issues) or the
+[contact form](https://pandus.online/en/contact).
